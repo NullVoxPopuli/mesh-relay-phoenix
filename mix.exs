@@ -6,7 +6,10 @@ defmodule MeshRelay.Mixfile do
      version: "0.0.1",
      elixir: "~> 1.2",
      elixirc_paths: elixirc_paths(Mix.env),
-     compilers: [:phoenix, :gettext] ++ Mix.compilers,
+     compilers: [
+       :phoenix,
+      #  :gettext
+       ] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      aliases: aliases(),
@@ -21,10 +24,10 @@ defmodule MeshRelay.Mixfile do
      applications: [
        :phoenix,
        :phoenix_pubsub,
-       :phoenix_html,
+      #  :phoenix_html,
        :cowboy,
        :logger,
-       :gettext
+      #  :gettext
       #  :phoenix_ecto,
       #  :postgrex
        ]]
@@ -42,9 +45,9 @@ defmodule MeshRelay.Mixfile do
      {:phoenix_pubsub, "~> 1.0"},
     #  {:phoenix_ecto, "~> 3.0"},
     #  {:postgrex, ">= 0.0.0"},
-     {:phoenix_html, "~> 2.6"},
+    #  {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:gettext, "~> 0.11"},
+    #  {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"}]
   end
 

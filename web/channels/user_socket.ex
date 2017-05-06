@@ -1,9 +1,10 @@
 defmodule MeshRelay.UserSocket do
   use Phoenix.Socket
+  require Logger
 
   ## Channels
   # channel "room:*", MeshRelay.RoomChannel
-  channel "lobby", MeshRelay.LobbyChannel
+  channel "user:*", MeshRelay.UserChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
@@ -34,5 +35,5 @@ defmodule MeshRelay.UserSocket do
   #     MeshRelay.Endpoint.broadcast("users_socket:#{user.id}", "disconnect", %{})
   #
   # Returning `nil` makes this socket anonymous.
-  def id(socket), do: "users_socket:#{socket.assigns.uid}"
+  def id(socket), do: nil #{}"socket-uid:#{socket.assigns.uid}"
 end

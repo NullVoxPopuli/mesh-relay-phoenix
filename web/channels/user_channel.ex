@@ -13,13 +13,13 @@ defmodule MeshRelay.UserChannel do
     uid && message
   end
 
+  # uid is the member's channel that
+  # he/she receives their messages on.
+  # no messages not intended to be received by
+  # this member should be sent on this channel / subtopic
+  #
+  # socket.assigns.uid is the uid from the connect
   def join("user:" <> uid, _params, socket) do
-    # uid is the member's channel that
-    # he/she receives their messages on.
-    # no messages not intended to be received by
-    # this member should be sent on this channel / subtopic
-    #
-    # socket.assigns.uid is the uid from the connect
     has_uids = uids_present(uid, socket.assigns.uid)
 
     if has_uids do

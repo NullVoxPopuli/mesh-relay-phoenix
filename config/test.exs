@@ -8,12 +8,3 @@ config :mesh_relay, MeshRelay.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
-
-# # Configure your database
-# config :mesh_relay, MeshRelay.Repo,
-#   adapter: Ecto.Adapters.Postgres,
-#   username: "postgres",
-#   password: "postgres",
-#   database: "mesh_relay_test",
-#   hostname: "localhost",
-#   pool: Ecto.Adapters.SQL.Sandbox

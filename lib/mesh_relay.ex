@@ -8,12 +8,8 @@ defmodule MeshRelay do
 
     # Define workers and child supervisors to be supervised
     children = [
-      # Start the Ecto repository
-      # supervisor(MeshRelay.Repo, []),
       # Start the endpoint when the application starts
       supervisor(MeshRelay.Endpoint, []),
-      # Start your own worker by calling: MeshRelay.Worker.start_link(arg1, arg2, arg3)
-      # worker(MeshRelay.Worker, [arg1, arg2, arg3]),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

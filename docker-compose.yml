@@ -1,0 +1,10 @@
+
+version: '2'
+services:
+  web:
+    build: .
+    command: mix phoenix.server
+    volumes:
+      - .:/app
+    ports:
+      - "4000:4000"

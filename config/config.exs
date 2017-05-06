@@ -6,8 +6,7 @@
 use Mix.Config
 
 # General application configuration
-config :mesh_relay,
-  ecto_repos: [MeshRelay.Repo]
+# config :mesh_relay, ecto_repos: [MeshRelay.Repo]
 
 # Configures the endpoint
 config :mesh_relay, MeshRelay.Endpoint,

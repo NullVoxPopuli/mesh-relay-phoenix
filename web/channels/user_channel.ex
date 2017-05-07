@@ -37,11 +37,11 @@ defmodule MeshRelay.UserChannel do
 
   def handle_in("chat", incoming_payload, socket) do
     if has_valid_payload(incoming_payload) do
+      from_uid = socket.assigns.uid
       uid = incoming_payload["to"]
       message = incoming_payload["message"]
-
       topic = "user:#{uid}"
-      payload = %{uid: uid, message: message}
+      payload = %{uid: from_uid, message: message}
 
       MeshRelay.Endpoint.broadcast(topic, "chat", payload)
       # broadcast! socket, "chat", payload

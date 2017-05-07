@@ -41,7 +41,7 @@ defmodule MeshRelay.UserChannel do
       message = incoming_payload["message"]
 
       topic = "user:#{uid}"
-      payload = %{uid: uid, message: "--- #{message}"}
+      payload = %{uid: uid, message: message}
 
       MeshRelay.Endpoint.broadcast(topic, "chat", payload)
       # broadcast! socket, "chat", payload

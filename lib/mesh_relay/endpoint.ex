@@ -1,7 +1,7 @@
 defmodule MeshRelay.Endpoint do
   use Phoenix.Endpoint, otp_app: :mesh_relay
 
-  socket "/", MeshRelay.UserSocket
+  socket "/socket", MeshRelay.UserSocket
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.

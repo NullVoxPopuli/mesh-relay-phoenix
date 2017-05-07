@@ -7,7 +7,7 @@ defmodule MeshRelay.UserChannel do
   end
 
   defp has_valid_payload(payload) do
-    uid = payload["uid"]
+    uid = payload["to"]
     message = payload["message"]
 
     uid && message

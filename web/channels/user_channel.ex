@@ -1,5 +1,6 @@
 defmodule MeshRelay.UserChannel do
-  use Phoenix.Channel
+  use Phoenix.Channel, :channel
+  alias PhoenixChat.Presence
   require Logger
 
   defp uids_present(to_uid, from_uid) do
@@ -23,6 +24,8 @@ defmodule MeshRelay.UserChannel do
     has_uids = uids_present(uid, socket.assigns.uid)
 
     if has_uids do
+      send(self, :after_join)
+      # Logger.debug Presence.list(socket)
       {:ok, socket}
     else
       # kick him out he is not allowed here
@@ -32,8 +35,6 @@ defmodule MeshRelay.UserChannel do
       }
     end
   end
-
-
 
   def handle_in("chat", incoming_payload, socket) do
     if has_valid_payload(incoming_payload) do
@@ -58,4 +59,18 @@ defmodule MeshRelay.UserChannel do
       }
     end
   end
+
+  def handle_info(:after_join, socket) do
+    Presence.track(socket, socket.assigns.uid, %{
+      online_at: inspect(System.system_time(:milli_seconds))
+    })
+
+    push socket, "presence_state", Presence.list(socket)
+    {:noreply, socket}
+  end
+
+  def is_member_online? do
+    #  Presence.list(socket)
+  end
+
 end

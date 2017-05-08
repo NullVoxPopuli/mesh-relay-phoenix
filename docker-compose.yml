@@ -3,7 +3,7 @@ version: '2'
 services:
   web:
     build: .
-    command: mix phoenix.server
+    command: bash -c "mix deps.get && mix phoenix.server"
     volumes:
       - .:/app
     ports:

@@ -44,10 +44,17 @@ defmodule MeshRelay.UserChannel do
       topic = "user:#{uid}"
       payload = %{uid: from_uid, message: message}
 
-      MeshRelay.Endpoint.broadcast(topic, "chat", payload)
-      # broadcast! socket, "chat", payload
+      if is_member_online?(uid) do
+        MeshRelay.Endpoint.broadcast(topic, "chat", payload)
+        # broadcast! socket, "chat", payload
+        {:reply, :ok, socket}
+      else
+        {:reply, {:error, %{
+          reason: "member not found",
+          data: incoming_payload
+        }}}
+      end
 
-      {:reply, :ok, socket}
     else
       {:reply,
         {:error,
@@ -60,17 +67,25 @@ defmodule MeshRelay.UserChannel do
     end
   end
 
+  # And so you can just do `UserChatPresence.list("chat_users")` (edited)
+  #
+  # And if you want to be notified of when the presence changes,
+  # you can do `Phoenix.PubSub.subscribe(MyApp.PubSub, "chat_users")`
+  # in a process, and then make a `handle_info` handler for
+  #  `%Phoenix.Socket.Broadcast{topic: "chat_users", event: "presence_diff"}`
   def handle_info(:after_join, socket) do
-    Presence.track(socket, socket.assigns.uid, %{
+    Presence.track(socket.channel_pid, "connected_members", socket.assigns.uid, %{
       online_at: inspect(System.system_time(:milli_seconds))
     })
 
-    push socket, "presence_state", Presence.list(socket)
     {:noreply, socket}
   end
 
-  def is_member_online? do
-    #  Presence.list(socket)
+  def is_member_online?(uid) do
+    Presence.list("connected_members")
+    |> Map.keys
+    |> Enum.any?(fn key -> key == uid end)
   end
+
 
 end

@@ -3,8 +3,8 @@ version: '2'
 services:
   web:
     build: .
-    command: mix phoenix.server
+    command: bash -c "mix deps.get && mix phoenix.server"
     volumes:
       - .:/app
     ports:
-      - "4000:4000"
+      - "4301:4301"

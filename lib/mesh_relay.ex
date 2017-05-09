@@ -10,6 +10,7 @@ defmodule MeshRelay do
     children = [
       # Start the endpoint when the application starts
       supervisor(MeshRelay.Endpoint, []),
+      supervisor(MeshRelay.Presence, []),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

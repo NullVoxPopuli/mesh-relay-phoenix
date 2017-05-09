@@ -1,6 +1,6 @@
 defmodule MeshRelay.UserChannel do
   use Phoenix.Channel, :channel
-  alias PhoenixChat.Presence
+  alias MeshRelay.Presence
   require Logger
 
   defp uids_present(to_uid, from_uid) do
@@ -24,7 +24,7 @@ defmodule MeshRelay.UserChannel do
     has_uids = uids_present(uid, socket.assigns.uid)
 
     if has_uids do
-      send(self, :after_join)
+      send(self(), :after_join)
       # Logger.debug Presence.list(socket)
       {:ok, socket}
     else
@@ -49,22 +49,21 @@ defmodule MeshRelay.UserChannel do
         # broadcast! socket, "chat", payload
         {:reply, :ok, socket}
       else
-        {:reply, {:error, %{
+        reply_with_error_message(socket, %{
           reason: "member not found",
-          data: incoming_payload
-        }}}
+          to_uid: uid,
+          from_uid: from_uid
+        })
       end
-
     else
-      {:reply,
-        {:error,
-          %{
-            reason: "please format your message: { \"to\": \"uidstring\", \"message\": \"encrypted message\" }",
-            data: incoming_payload
-          }},
-        socket
-      }
+      reply_with_error_message(socket, %{
+        reason: "please format your message: { \"to\": \"uidstring\", \"message\": \"encrypted message\" }"
+      })
     end
+  end
+
+  def reply_with_error_message(socket, error) do
+    {:reply, {:error, error}, socket }
   end
 
   # And so you can just do `UserChatPresence.list("chat_users")` (edited)

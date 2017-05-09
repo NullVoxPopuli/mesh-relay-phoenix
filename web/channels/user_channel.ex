@@ -50,7 +50,7 @@ defmodule MeshRelay.UserChannel do
         {:reply, :ok, socket}
       else
         reply_with_error_message(socket, %{
-          reason: "member not found",
+          reason: "member not found or not online",
           to_uid: uid,
           from_uid: from_uid
         })

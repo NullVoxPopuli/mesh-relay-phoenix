@@ -9,7 +9,7 @@ defmodule MeshRelay do
     # Define workers and child supervisors to be supervised
     children = [
       # Start the endpoint when the application starts
-      supervisor(MeshRelay.Endpoint, []),
+      supervisor(MeshRelayWeb.Endpoint, []),
       supervisor(MeshRelay.Presence, []),
     ]
 
@@ -22,7 +22,7 @@ defmodule MeshRelay do
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    MeshRelay.Endpoint.config_change(changed, removed)
+    MeshRelayWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 end

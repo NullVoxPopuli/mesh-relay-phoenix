@@ -1,5 +1,5 @@
-defmodule MeshRelay.UserChannel do
-  use Phoenix.Channel, :channel
+defmodule MeshRelayWeb.UserChannel do
+  use Phoenix.Channel
   alias MeshRelay.Presence
   require Logger
 
@@ -45,7 +45,7 @@ defmodule MeshRelay.UserChannel do
       payload = %{uid: from_uid, message: message}
 
       if is_member_online?(uid) do
-        MeshRelay.Endpoint.broadcast(topic, "chat", payload)
+        MeshRelayWeb.Endpoint.broadcast(topic, "chat", payload)
         # broadcast! socket, "chat", payload
         {:reply, :ok, socket}
       else

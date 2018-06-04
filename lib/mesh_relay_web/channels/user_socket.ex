@@ -1,10 +1,10 @@
-defmodule MeshRelay.UserSocket do
+defmodule MeshRelayWeb.UserSocket do
   use Phoenix.Socket
   require Logger
 
   ## Channels
   # channel "room:*", MeshRelay.RoomChannel
-  channel "user:*", MeshRelay.UserChannel
+  channel "user:*", MeshRelayWeb.UserChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

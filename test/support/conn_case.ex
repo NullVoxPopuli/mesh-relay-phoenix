@@ -28,7 +28,7 @@ defmodule MeshRelay.ConnCase do
       import MeshRelay.Router.Helpers
 
       # The default endpoint for testing
-      @endpoint MeshRelay.Endpoint
+      @endpoint MeshRelayWeb.Endpoint
     end
   end
 

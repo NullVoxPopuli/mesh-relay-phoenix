@@ -27,7 +27,7 @@ defmodule MeshRelay.ChannelCase do
 
 
       # The default endpoint for testing
-      @endpoint MeshRelay.Endpoint
+      @endpoint MeshRelayWeb.Endpoint
     end
   end
 

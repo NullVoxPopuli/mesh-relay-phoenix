@@ -40,6 +40,7 @@ defmodule MeshRelay.Mixfile do
      {:open_graph_extended, "~> 0.1.1"},
      {:httpoison, "~> 1.0"},
      {:plug, "~> 1.0"},
+     {:cors_plug, "~> 1.5"},
      {:cowboy, "~> 1.0"}]
   end
 

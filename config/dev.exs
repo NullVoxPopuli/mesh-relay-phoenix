@@ -17,12 +17,18 @@ config :mesh_relay, MeshRelayWeb.Endpoint,
 config :mesh_relay, MeshRelayWeb.Endpoint,
   live_reload: [
     patterns: [
-      # ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
-      # ~r{priv/gettext/.*(po)$},
-      # ~r{web/views/.*(ex)$},
-      # ~r{web/templates/.*(eex)$}
+      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
+      ~r{priv/gettext/.*(po)$},
+      ~r{web/views/.*(ex)$},
+      ~r{web/templates/.*(eex)$}
     ]
   ]
+
+# Configures Elixir's Logger
+config :logger, :console,
+  format: "$time $metadata[$level] $message\n",
+  metadata: [:request_id]
+
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"

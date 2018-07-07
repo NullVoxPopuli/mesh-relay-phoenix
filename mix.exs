@@ -2,30 +2,28 @@ defmodule MeshRelay.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :mesh_relay,
-     version: "0.0.1",
-     elixir: "~> 1.2",
-     elixirc_paths: elixirc_paths(Mix.env),
-     compilers: [
-       :phoenix
-     ] ++ Mix.compilers,
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     aliases: aliases(),
-     deps: deps()]
+    [
+      app: :mesh_relay,
+      version: "0.0.1",
+      elixir: "~> 1.4",
+      elixirc_paths: elixirc_paths(Mix.env),
+      compilers: [
+        :phoenix
+      ] ++ Mix.compilers,
+      build_embedded: Mix.env == :prod,
+      start_permanent: Mix.env == :prod,
+      aliases: aliases(),
+      deps: deps()]
   end
 
   # Configuration for the OTP application.
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {MeshRelay, []},
-     applications: [
-       :phoenix,
-       :phoenix_pubsub,
-       :cowboy,
-       :logger
-       ]]
+    [
+      mod: {MeshRelay.Application, []},
+      extra_applications: [:logger, :runtime_tools, :httpoison]
+    ]
   end
 
   # Specifies which paths to compile per environment.
@@ -39,6 +37,9 @@ defmodule MeshRelay.Mixfile do
     [{:phoenix, "~> 1.3.2"},
      {:phoenix_pubsub, "~> 1.0.2"},
      {:phoenix_live_reload, "~> 1.1.5", only: :dev},
+     {:open_graph_extended, "~> 0.1.1"},
+     {:httpoison, "~> 1.0"},
+     {:plug, "~> 1.0"},
      {:cowboy, "~> 1.0"}]
   end
 

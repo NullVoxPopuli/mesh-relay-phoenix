@@ -39,6 +39,8 @@ defmodule MeshRelay.Mixfile do
     [{:phoenix, "~> 1.3.2"},
      {:phoenix_pubsub, "~> 1.0.2"},
      {:phoenix_live_reload, "~> 1.1.5", only: :dev},
+     {:open_graph_extended, "~> 0.1.1"},
+     {:plug, "~> 1.0"}
      {:cowboy, "~> 1.0"}]
   end
 

@@ -16,6 +16,21 @@ defmodule MeshRelay.Web do
   below.
   """
 
+  def controller do
+    quote do
+      use Phoenix.Controller, namespace: MeshRelay.Web
+      import Plug.Conn
+    end
+  end
+
+  def router do
+    quote do
+      use Phoenix.Router
+      import Plug.Conn
+      import Phoenix.Controller
+    end
+  end
+
   def channel do
     quote do
       use Phoenix.Channel

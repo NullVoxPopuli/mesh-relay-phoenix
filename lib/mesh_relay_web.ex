@@ -1,12 +1,12 @@
-defmodule MeshRelay.Web do
+defmodule MeshRelayWeb do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use MeshRelay.Web, :controller
-      use MeshRelay.Web, :view
+      use MeshRelayWeb, :controller
+      use MeshRelayWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -18,8 +18,17 @@ defmodule MeshRelay.Web do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: MeshRelay.Web
+      use Phoenix.Controller, namespace: MeshRelayWeb
       import Plug.Conn
+    end
+  end
+
+  def view do
+    quote do
+      use Phoenix.View, root: "lib/mesh_relay_web/templates",
+                        namespace: MeshRelayWeb
+
+
     end
   end
 

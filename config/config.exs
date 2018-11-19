@@ -11,7 +11,7 @@ use Mix.Config
 # Configures the endpoint
 config :mesh_relay, MeshRelayWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "b3vfaAA3MM27W2VRpngWUOFgEi4M9XSnzA5VqLNWDZQt0QBOiB6zMyUJKSn5T5zh",
+  secret_key_base: nil,
   render_errors: [view: MeshRelay.ErrorView, accepts: ~w(html json)],
   pubsub: [name: MeshRelay.PubSub,
            adapter: Phoenix.PubSub.PG2]

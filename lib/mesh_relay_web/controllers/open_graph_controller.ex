@@ -9,7 +9,13 @@ defmodule MeshRelayWeb.OpenGraphController do
     response = HTTPoison.get!(encoded_url)
     body = response.body
 
-    og = OpenGraphExtended.parse(body)
+    og =
+      try do
+        OpenGraphExtended.parse(body)
+      rescue
+        _ -> %{}
+      end
+
 
     conn
     |> render("index.json", open_graph: og)

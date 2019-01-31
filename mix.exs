@@ -22,7 +22,11 @@ defmodule MeshRelay.Mixfile do
   def application do
     [
       mod: {MeshRelay.Application, []},
-      extra_applications: [:logger, :runtime_tools, :httpoison]
+      extra_applications: [
+        :logger,
+        :runtime_tools,
+        :httpoison
+      ]
     ]
   end
 

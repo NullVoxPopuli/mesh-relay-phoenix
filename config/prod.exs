@@ -20,7 +20,7 @@ config :mesh_relay, MeshRelayWeb.Endpoint,
   # secret_key_base: System.get_env("SECRET_KEY_BASE")
 
 # Do not print any messages in production
-# config :logger, level: :info
+config :logger, level: :error
 
 # ## SSL Support
 #

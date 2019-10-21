@@ -1,7 +1,7 @@
 defmodule MeshRelayWeb.UserChannel do
   use Phoenix.Channel
   alias MeshRelay.Presence
-  require Logger
+  # require Logger
 
   defp uids_present(to_uid, from_uid) do
     to_uid && from_uid
@@ -73,9 +73,14 @@ defmodule MeshRelayWeb.UserChannel do
   # in a process, and then make a `handle_info` handler for
   #  `%Phoenix.Socket.Broadcast{topic: "chat_users", event: "presence_diff"}`
   def handle_info(:after_join, socket) do
-    Presence.track(socket.channel_pid, "connected_members", socket.assigns.uid, %{
-      online_at: inspect(System.system_time(:milli_seconds))
-    })
+    Presence.track(
+      socket.channel_pid,
+      "connected_members",
+      socket.assigns.uid,
+      %{
+        online_at: inspect(System.system_time(:milli_seconds))
+      }
+    )
 
     {:noreply, socket}
   end
@@ -85,6 +90,4 @@ defmodule MeshRelayWeb.UserChannel do
     |> Map.keys
     |> Enum.any?(fn key -> key == uid end)
   end
-
-
 end

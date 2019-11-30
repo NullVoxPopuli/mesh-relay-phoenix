@@ -40,5 +40,5 @@ defmodule MeshRelayWeb.UserSocket do
   #     MeshRelay.Endpoint.broadcast("users_socket:#{user.id}", "disconnect", %{})
   #
   # Returning `nil` makes this socket anonymous.
-  def id(socket), do: nil #{}"socket-uid:#{socket.assigns.uid}"
+  def id(_socket), do: nil #{}"socket-uid:#{socket.assigns.uid}"
 end

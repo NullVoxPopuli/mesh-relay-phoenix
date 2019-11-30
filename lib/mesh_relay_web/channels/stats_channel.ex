@@ -2,7 +2,7 @@ defmodule MeshRelayWeb.StatsChannel do
   use Phoenix.Channel
   alias MeshRelay.Presence
 
-  def join("stats", params, socket) do
+  def join("stats", _params, socket) do
     send(self(), :after_join)
 
     {:ok, socket}
@@ -10,14 +10,16 @@ defmodule MeshRelayWeb.StatsChannel do
 
   def handle_info(:after_join, socket) do
     stats = %{
-      connection_count:
+      connection_count: (
         # connected_members is managed in user_channel
         # NOTE: somehow connected members doesn't include the
         #       "current socket"'s user.
         # NOTE: the client should add one
         Presence.list("connected_members")
         |> Map.keys
-        |> length,
+        |> length
+        |> Kernel.+(1)
+      ),
       relay: %{
         elixir: System.version()
       }

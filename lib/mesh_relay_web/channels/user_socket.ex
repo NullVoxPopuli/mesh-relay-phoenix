@@ -5,6 +5,7 @@ defmodule MeshRelayWeb.UserSocket do
   ## Channels
   # channel "room:*", MeshRelay.RoomChannel
   channel "user:*", MeshRelayWeb.UserChannel
+  channel "stats", MeshRelayWeb.StatsChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
@@ -22,7 +23,11 @@ defmodule MeshRelayWeb.UserSocket do
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
   def connect(params, socket) do
-    {:ok, assign(socket, :uid, params["uid"])}
+    uid = params["uid"]
+    socket = assign(socket, :uid, uid)
+    socket = assign(socket, :user_id, uid)
+
+    {:ok, socket}
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
@@ -35,5 +40,5 @@ defmodule MeshRelayWeb.UserSocket do
   #     MeshRelay.Endpoint.broadcast("users_socket:#{user.id}", "disconnect", %{})
   #
   # Returning `nil` makes this socket anonymous.
-  def id(socket), do: nil #{}"socket-uid:#{socket.assigns.uid}"
+  def id(_socket), do: nil #{}"socket-uid:#{socket.assigns.uid}"
 end

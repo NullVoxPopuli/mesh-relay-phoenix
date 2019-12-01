@@ -20,6 +20,9 @@ defmodule MeshRelayWeb.StatsChannel do
         |> length
         |> Kernel.+(1)
       ),
+      connected_relays: 0,
+      connected_to_relays: %{},
+
       relay: %{
         elixir: System.version()
       }
